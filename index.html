@@ -3,17 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audio Playlist</title>
+    <title>Music Playlist</title>
 </head>
 <body>
-    <h1>My Playlist</h1>
-    <audio controls>
-        <source src="https://example.com/music1.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-    <audio controls>
-        <source src="https://youtu.be/HqT0CVDK5X4?si=_VUJPOPZakj9q6Ha" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+    <h1>My Music Playlist</h1>
+
+    <div id="playlist">
+        <!-- Os arquivos de música serão exibidos aqui -->
+    </div>
+
+    <script>
+        const mediaFolder = 'media/'; // Pasta onde estão os arquivos de música
+        const supportedFormats = ['mp3', 'mp4']; // Formatos suportados
+
+        // Lista dos arquivos de música que você adicionar na pasta 'media'
+        const musicFiles = [
+            'song1.mp3',
+            'song2.mp4',
+            'song3.mp3'
+        ];
+
+        const playlistDiv = document.getElementById('playlist');
+
+        // Adiciona cada música na página com um player
+        musicFiles.forEach(file => {
+            const fileExtension = file.split('.').pop();
+            if (supportedFormats.includes(fileExtension)) {
+                const audioPlayer = document.createElement(fileExtension === 'mp3' ? 'audio' : 'video');
+                audioPlayer.controls = true;
+                audioPlayer.src = mediaFolder + file;
+
+                const trackTitle = document.createElement('p');
+                trackTitle.textContent = `Playing: ${file}`;
+
+                playlistDiv.appendChild(trackTitle);
+                playlistDiv.appendChild(audioPlayer);
+            }
+        });
+    </script>
 </body>
 </html>
