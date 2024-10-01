@@ -3,107 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload and Play Playlist (MP3/MP4)</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-        #file-link {
-            margin-top: 20px;
-        }
-        audio, video {
-            margin-top: 20px;
-            width: 100%;
-            max-width: 600px;
-        }
-        .playlist {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-        }
-        .playlist li {
-            cursor: pointer;
-            margin: 5px 0;
-            color: blue;
-        }
-    </style>
+    <title>Audio Playlist</title>
 </head>
 <body>
-
-    <h1>Upload and Play Playlist (MP3/MP4)</h1>
-
-    <!-- Formulário de upload de arquivos -->
-    <input type="file" id="file-input" accept="audio/mp3, video/mp4" multiple>
-    <br>
-
-    <!-- Lista de reprodução -->
-    <ul id="playlist" class="playlist"></ul>
-
-    <!-- Reprodutor de mídia -->
-    <audio id="audio-player" controls style="display: none;"></audio>
-    <video id="video-player" controls style="display: none;"></video>
-
-    <script>
-        const fileInput = document.getElementById('file-input');
-        const playlist = document.getElementById('playlist');
-        const audioPlayer = document.getElementById('audio-player');
-        const videoPlayer = document.getElementById('video-player');
-        let currentFileIndex = 0;
-        let files = [];
-
-        fileInput.addEventListener('change', function(event) {
-            files = Array.from(event.target.files);
-            playlist.innerHTML = '';
-            files.forEach((file, index) => {
-                const li = document.createElement('li');
-                li.textContent = file.name;
-                li.dataset.index = index;
-                playlist.appendChild(li);
-            });
-            currentFileIndex = 0;
-            playFile(files[currentFileIndex]);
-        });
-
-        playlist.addEventListener('click', function(event) {
-            if (event.target.tagName === 'LI') {
-                currentFileIndex = parseInt(event.target.dataset.index);
-                playFile(files[currentFileIndex]);
-            }
-        });
-
-        function playFile(file) {
-            const fileURL = URL.createObjectURL(file);
-
-            if (file.type.startsWith('audio')) {
-                audioPlayer.src = fileURL;
-                audioPlayer.style.display = 'block';
-                videoPlayer.style.display = 'none';
-                audioPlayer.play();
-            } else if (file.type.startsWith('video')) {
-                videoPlayer.src = fileURL;
-                videoPlayer.style.display = 'block';
-                audioPlayer.style.display = 'none';
-                videoPlayer.play();
-            }
-        }
-
-        // Passar automaticamente para o próximo arquivo após o término
-        audioPlayer.addEventListener('ended', function() {
-            currentFileIndex++;
-            if (currentFileIndex < files.length) {
-                playFile(files[currentFileIndex]);
-            }
-        });
-
-        videoPlayer.addEventListener('ended', function() {
-            currentFileIndex++;
-            if (currentFileIndex < files.length) {
-                playFile(files[currentFileIndex]);
-            }
-        });
-    </script>
-
+    <h1>My Playlist</h1>
+    <audio controls>
+        <source src="https://example.com/music1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio controls>
+        <source src="https://youtu.be/HqT0CVDK5X4?si=_VUJPOPZakj9q6Ha" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 </body>
 </html>
